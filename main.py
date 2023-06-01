@@ -18,9 +18,9 @@ def connection():
     db = cluster["Server"]
     user = db["Users"]
     return user
-def open_new_page():
-    url='https://gurleen21-capstoneserverdashboard-app-o649ro.streamlit.app/'
-    webbrowser.open_new_tab(url)
+# def open_new_page():
+#     url='https://gurleen21-capstoneserverdashboard-app-o649ro.streamlit.app/'
+#     webbrowser.open_new_tab(url)
 
 def login(user):
     st.title("Login")
@@ -35,15 +35,27 @@ def login(user):
         for result in results:
             print(result['Username'])
             if username == result['Username'] and password == result['Password']:
-                #st.success("Logged in successfully!")
+                st.success("Logged in successfully!")
                 is_logged_in = True
-                open_new_page()
+                # open_new_page()
+                # new_app_url = "https://gurleen21-capstoneserverdashboard-app-o649ro.streamlit.app/"
+                # js_code = f"window.open('{new_app_url}')"
+                # st.write(f'<script>{js_code}</script>', unsafe_allow_html=True)
+                #st.markdown('<a href="C:/Users/HP/Desktop/Main/Thapar/Capstone Project/Drone Based Surveillance System/App/ServerApp/Pages/Dashboard/app.py" target="_self">Dashboarde</a>', unsafe_allow_html=True)
+                st.markdown('<a href="https://gurleen21-capstoneserverdashboard-app-o649ro.streamlit.app/" target="_self">Go to Dashboard</a>', unsafe_allow_html=True)
                 break
 
         if(is_logged_in == False):
             st.error("Invalid Login")
 
-
+# def open_new_page():
+#     new_page_url = "https://www.google.com/"  # Replace with the desired URL
+#     new_page_script = f"""
+#     <script type="text/javascript">
+#         window.location.href = "{new_page_url}";
+#     </script>
+#     """
+#     st.write(new_page_script, unsafe_allow_html=True)
 def main(user):
     now = datetime.now()
     now = now.strftime("%S")
