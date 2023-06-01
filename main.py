@@ -1,6 +1,7 @@
 import streamlit as st
 import pymongo
 from datetime import datetime
+import webbrowser
 
 global cluster
 global db
@@ -17,6 +18,9 @@ def connection():
     db = cluster["Server"]
     user = db["Users"]
     return user
+def open_new_page():
+    url='https://gurleen21-capstoneserverdashboard-app-o649ro.streamlit.app/'
+    webbrowser.open_new_tab(url)
 
 def login(user):
     st.title("Login")
@@ -33,6 +37,7 @@ def login(user):
             if username == result['Username'] and password == result['Password']:
                 st.success("Logged in successfully!")
                 is_logged_in = True
+                open_new_page()
                 break
 
         if(is_logged_in == False):
