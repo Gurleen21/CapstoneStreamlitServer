@@ -1,12 +1,24 @@
 import streamlit as st
 import pymongo
+from datetime import datetime
 
-cluster = pymongo.MongoClient(
-    "mongodb+srv://gurleen2113:parika13@cluster0.70n9crp.mongodb.net/?retryWrites=true&w=majority",serverSelectionTimeoutMS=60000)
-db = cluster["Server"]
-user = db["Users"]
+global cluster
+global db
+global user
+# cluster = pymongo.MongoClient(
+#     "mongodb+srv://gurleen2113:parika13@cluster0.70n9crp.mongodb.net/?retryWrites=true&w=majority",serverSelectionTimeoutMS=60000)
+# db = cluster["Server"]
+# user = db["Users"]
+#serverSelectionTimeoutMS=60000
+def connection():
+    global user
+    cluster = pymongo.MongoClient(
+    "mongodb+srv://gurleen2113:parika13@cluster0.70n9crp.mongodb.net/?retryWrites=true&w=majority")
+    db = cluster["Server"]
+    user = db["Users"]
+    return user
 
-def login():
+def login(user):
     st.title("Login")
     username = st.text_input("Username", key="name")
     password = st.text_input("Password", key= "password",type="password")
@@ -27,9 +39,15 @@ def login():
             st.error("Invalid Login")
 
 
-def main():
+def main(user):
+    now = datetime.now()
+    now = now.strftime("%S")
+    now=str(now)
+    if(now==0 or now==00 or now==30):
+        user = connection()
     is_logged_in = st.session_state.get('is_logged_in', False)
-    login()
+    login(user)
 
 if __name__ == "__main__":
-    main()
+    user = connection()
+    main(user)
