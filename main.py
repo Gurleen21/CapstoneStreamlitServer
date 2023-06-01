@@ -2,7 +2,7 @@ import streamlit as st
 import pymongo
 
 cluster = pymongo.MongoClient(
-    "mongodb+srv://gurleen2113:parika13@cluster0.70n9crp.mongodb.net/?retryWrites=true&w=majority")
+    "mongodb+srv://gurleen2113:parika13@cluster0.70n9crp.mongodb.net/?retryWrites=true&w=majority",serverSelectionTimeoutMS=60000)
 db = cluster["Server"]
 user = db["Users"]
 
