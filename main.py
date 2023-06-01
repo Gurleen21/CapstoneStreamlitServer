@@ -35,7 +35,7 @@ def login(user):
         for result in results:
             print(result['Username'])
             if username == result['Username'] and password == result['Password']:
-                st.success("Logged in successfully!")
+                #st.success("Logged in successfully!")
                 is_logged_in = True
                 open_new_page()
                 break
